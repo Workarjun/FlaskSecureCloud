@@ -12,5 +12,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ .
 
 # Expose port and define the startup command
-EXPOSE 8080
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "main:app"]
+EXPOSE 5000
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app"]
