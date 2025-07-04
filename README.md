@@ -1,74 +1,108 @@
-**INTRODUCTION**
+# FlaskSecureCloud 🚀
 
-This project is a minimal and secure web application built using Flask that provides JWT-based user authentication (signup, login, logout) with a protected dashboard route. It is containerized using Docker, deployed to Google Cloud Run, and the infrastructure is managed using Terraform. The goal is to demonstrate a clean and scalable deployment pipeline for a simple web application on the cloud.
+A secure and scalable Flask web application with JWT-based authentication, Docker containerization, and deployment to Google Cloud Run using Terraform.
 
-📌**Project Overview**
+---
 
-The application allows users to sign up and log in securely. Authenticated users receive a JWT (JSON Web Token), which is stored in a browser cookie and is used to protect routes like /dashboard. The project uses a simple HTML interface (no JS), a lightweight SQLite3 database for storage, and a secure Flask backend that handles authentication and routing.
+## 📌 Table of Contents
 
-To keep the setup modern and cloud-native, the application is containerized using Docker, deployed to Google Cloud Run, and provisioned using Terraform. Additionally, CI/CD can be added using Google Cloud Build to automatically build, push, and deploy the application on every commit.
+- [Overview]
+- [Features]
+- [Tech Stack]
+- [Project Structure]
+- [Getting Started]
+- [Terraform Deployment]
+- [Cloud Run Deployment with Docker]
+
+## 🌐 Overview
+
+**FlaskSecureCloud** is a web application built using Python and Flask that enables users to securely sign up, log in, and access a protected dashboard. It uses **JWT (JSON Web Tokens)** for authentication and **SQLite** for data storage in development. The app is containerized with **Docker** and deployed to **Google Cloud Run**, with infrastructure managed via **Terraform**.
+
+---
+
+## ✅ Features
+
+- 🔐 Secure Signup/Login with hashed passwords and JWT cookies
+- 👤 Protected user dashboard
+- 🧪 `/health` endpoint for health checks
+- 🐳 Docker containerization for portability
+- ☁️ Google Cloud Run deployment for serverless execution
+- ⚙️ Infrastructure as Code using Terraform
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML, Jinja2 Templates
+- **Backend**: Python, Flask
+- **Auth**: JWT (JSON Web Tokens)
+- **Database**: SQLite
+- **Containerization**: Docker
+- **Cloud Platform**: Google Cloud Platform (Cloud Run)
+- **IaC**: Terraform
+- **Web Server**: Gunicorn
 
 
-⚙️ **Technologies Used**
+## 📁 Project Structure
 
-Flask – Python web framework
+FlaskSecureCloud/
+├── app/
+│ ├── main.py
+│ ├── requirements.txt
+│ └── templates/
+│ ├── login.html
+│ ├── signup.html
+│ └── dashboard.html
+├── Dockerfile
+├── .gitignore
+└── terraform/
+├── main.tf
+├── variables.tf
+├── terraform.tfvars
+└── .terraform.lock.hcl
 
-JWT – Secure token-based authentication
 
-SQLite3 – Lightweight local database
+## ⚙️ Getting Started (Local Setup)
 
-Docker – Containerization of the application
+1. **Clone the Repository**  
+   git clone https://github.com/Workarjun/FlaskSecureCloud.git
+   cd FlaskSecureCloud
 
-Google Cloud Run – Serverless deployment
+Set up a virtual environment
 
-Terraform – Infrastructure as Code (IaC) for provisioning
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-Cloud Build (Optional) – CI/CD pipeline for auto deployment
+Install dependencies
+pip install -r app/requirements.txt
 
-🚀 **Running the Application**
+Run the app
+python app/main.py
 
-🔧 Local Setup (for testing)
+☁️ Terraform Deployment
+Update terraform.tfvars
+Replace values with your actual GCP project and region:
 
-You can run the app locally using:
+project_id = "your-gcp-project-id"
+region     = "us-central1"
 
-cd app
-python main.py
 
-The app will start on http://localhost:5000. You can access the login/signup pages from here.
+Initialize Terraform and apply
 
-🐳 **Docker Deployment**
-
-To containerize and run the app locally:
-
-docker build -t flask-app .
-docker run -p 8080:8080 flask-app
-
-Visit http://localhost:8080
-
-☁️ **Deploying to Google Cloud Run using Terraform**
-
-Authenticate with Google Cloud:
-gcloud auth login
-gcloud config set project your-project-id
-
-Build and push the Docker image:
-gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/flask-app
-
-Apply Terraform to deploy Cloud Run:
-cd terraform
+cd terraform/
 terraform init
 terraform apply
-After deployment, Terraform will output the live Cloud Run URL of your application.
+Output:
+After successful deployment, Terraform will show the Cloud Run service URL.
 
+🐳 Cloud Run Deployment with Docker
 
-🔐 **How JWT Authentication Works**
+Build Docker Image
 
-The app uses JWT tokens for secure session management:
+docker build -t gcr.io/healthy-highway-426311-i0/flask-app .
 
-Login: When a user logs in, a token is generated with their username and expiration time.
+Push to Artifact Registry (or Container Registry)
 
-Cookie: The token is stored in a browser cookie (token) for use on future requests.
+docker push gcr.io/healthy-highway-426311-i0/flask-app
 
-Protected Routes: Routes like /dashboard are protected with a @token_required decorator that checks the validity of the token.
-
-Logout: Logging out simply clears the cookie, effectively removing the token.
+Deploy via Terraform or gcloud CLI
