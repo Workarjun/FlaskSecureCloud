@@ -9,7 +9,6 @@ A secure and scalable Flask web application with JWT-based authentication, Docke
 - [Overview]
 - [Features]
 - [Tech Stack]
-- [Project Structure]
 - [Getting Started]
 - [Terraform Deployment]
 - [Cloud Run Deployment with Docker]
@@ -41,25 +40,6 @@ A secure and scalable Flask web application with JWT-based authentication, Docke
 - **Cloud Platform**: Google Cloud Platform (Cloud Run)
 - **IaC**: Terraform
 - **Web Server**: Gunicorn
-
-
-## 📁 Project Structure
-
-FlaskSecureCloud/
-├── app/
-│ ├── main.py
-│ ├── requirements.txt
-│ └── templates/
-│ ├── login.html
-│ ├── signup.html
-│ └── dashboard.html
-├── Dockerfile
-├── .gitignore
-└── terraform/
-├── main.tf
-├── variables.tf
-├── terraform.tfvars
-└── .terraform.lock.hcl
 
 
 ## ⚙️ Getting Started (Local Setup)
