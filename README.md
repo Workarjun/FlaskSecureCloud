@@ -63,7 +63,7 @@ python app/main.py
 Update terraform.tfvars
 Replace values with your actual GCP project and region:
 
-project_id = "your-gcp-project-id"
+project_id = "healthy-highway-426311-i0"
 region     = "us-central1"
 
 
